@@ -6,6 +6,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -34,7 +39,7 @@ public class ImagePickerClass  {
         this.activity = activity;
     }
 
-    public void callImagePickerDialog (Context receivedContext , String dialogTitleString , ImageView finalImageView){
+    public void callImagePickerDialog (Context receivedContext , String dialogTitleString , ImageView finalImageView , String buttonColor){
 
         this.context = receivedContext;
         this.imageView = finalImageView;
@@ -48,6 +53,9 @@ public class ImagePickerClass  {
         Button openGalleryBtn = (Button) dialogImagePicker.findViewById(R.id.openGallery);
         TextView dialogTitle = (TextView) dialogImagePicker.findViewById(R.id.dialogTitle);
         dialogTitle.setText(dialogTitleString);
+
+        ButtonColorChanger.setButtonColor(buttonColor , openGalleryBtn);
+        ButtonColorChanger.setButtonColor(buttonColor , openCameraBtn);
 
         openCameraBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -84,7 +92,7 @@ public class ImagePickerClass  {
     }
 
     // scales the received bitmap or not and then calls the method to set it to the imageview
-    public void scaleImageDialog (final Bitmap bitmap) {
+    public void scaleImageDialog (final Bitmap bitmap , String buttonColor) {
         dialogScaleImage = new Dialog(context);
         dialogScaleImage.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogScaleImage.setContentView(R.layout.dialog_scale_image);
@@ -95,6 +103,8 @@ public class ImagePickerClass  {
         rawHeight = (EditText) dialogScaleImage.findViewById(R.id.height);
         rawWidth = (EditText) dialogScaleImage.findViewById(R.id.width);
         Button scaleBtn = (Button) dialogScaleImage.findViewById(R.id.scaleBtn);
+
+        ButtonColorChanger.setButtonColor(buttonColor , scaleBtn);
 
         scaleCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -145,7 +155,7 @@ public class ImagePickerClass  {
     }
 
     //calls the methods that automatically set the received image bitmap to the needed ImageView
-    public void onActivityResultLogic (int requestCode, int resultCode, Intent data){
+    public void onActivityResultLogic (int requestCode, int resultCode, Intent data , String buttonColor){
 
         if (requestCode == CONSTANTS.RESULT_CAMERA_IMAGE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -153,7 +163,7 @@ public class ImagePickerClass  {
                     Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                             activity.getContentResolver(), imageUri);
 
-                    scaleImageDialog(thumbnail);
+                    scaleImageDialog(thumbnail , buttonColor);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -170,7 +180,7 @@ public class ImagePickerClass  {
                     Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                             activity.getContentResolver(), imageUri);
 
-                    scaleImageDialog(thumbnail);
+                    scaleImageDialog(thumbnail , buttonColor);
 
                 } catch (Exception e) {
                     e.printStackTrace();
