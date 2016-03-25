@@ -8,12 +8,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="TITLE"
+        android:text="@string/default_dialog_title"
         android:id="@+id/dialogTitle"
         android:layout_gravity="center_horizontal" />
 
@@ -24,7 +23,7 @@
         android:layout_weight="1"
         android:background="@drawable/button_background"
         android:textColor="@color/white"
-        android:text="Open Camera"
+        android:text="@string/open_camera"
         android:id="@+id/openCamera" />
 
     <Button
@@ -33,12 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@color/white"
-        android:text="Open Gallery"
+        android:text="@string/open_gallery"
         android:background="@drawable/button_background"
         android:id="@+id/openGallery" />
-
-
-
-
 
 </LinearLayout>

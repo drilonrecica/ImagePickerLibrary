@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Do you want to scale the image?"
+        android:text="@string/do_you_want_to_scale_the_image"
         android:layout_gravity="center_horizontal" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="Scale?"
+        android:text="@string/scale"
         android:checked="false"
         android:id="@+id/scaleCheckBox"
         android:layout_gravity="center_horizontal" />
@@ -35,7 +35,7 @@
             android:ems="10"
             android:enabled="false"
             android:gravity="center_horizontal"
-            android:hint="Width"
+            android:hint="@string/width"
             android:id="@+id/width"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal" />
@@ -47,7 +47,7 @@
             android:ems="10"
             android:enabled="false"
             android:gravity="center_horizontal"
-            android:hint="Height"
+            android:hint="@string/height"
             android:id="@+id/height"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal" />
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="OK"
+        android:text="@string/ok"
         android:background="@drawable/button_background"
         android:textColor="@color/white"
         android:id="@+id/scaleBtn"

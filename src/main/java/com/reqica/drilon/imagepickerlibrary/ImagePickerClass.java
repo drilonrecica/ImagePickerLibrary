@@ -58,9 +58,6 @@ public class ImagePickerClass  {
                         values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
                         imageUri = activity.getContentResolver().insert(
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-
-
-
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                         activity.startActivityForResult(intent, CONSTANTS.RESULT_CAMERA_IMAGE);
@@ -147,7 +144,6 @@ public class ImagePickerClass  {
 
     }
 
-
     //calls the methods that automatically set the received image bitmap to the needed ImageView
     public void onActivityResultLogic (int requestCode, int resultCode, Intent data){
 
@@ -188,7 +184,5 @@ public class ImagePickerClass  {
         }
 
     }
-
-
 
 }
