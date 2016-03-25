@@ -79,8 +79,8 @@ public class ImagePickerClass  {
         TextView dialogTitle = (TextView) dialogImagePicker.findViewById(R.id.dialogTitle);
         dialogTitle.setText(dialogTitleString);
 
-        ButtonColorChanger.setButtonColor(buttonColor , openGalleryBtn , textColor);
-        ButtonColorChanger.setButtonColor(buttonColor , openCameraBtn , textColor);
+        ButtonColorChanger.setButtonColor(buttonColor , openGalleryBtn , textColor , activity);
+        ButtonColorChanger.setButtonColor(buttonColor , openCameraBtn , textColor , activity);
 
         openCameraBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -129,7 +129,7 @@ public class ImagePickerClass  {
         rawWidth = (EditText) dialogScaleImage.findViewById(R.id.width);
         Button scaleBtn = (Button) dialogScaleImage.findViewById(R.id.scaleBtn);
 
-        ButtonColorChanger.setButtonColor(buttonColor , scaleBtn , textColor);
+        ButtonColorChanger.setButtonColor(buttonColor , scaleBtn , textColor , activity);
 
         scaleCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

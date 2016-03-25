@@ -25,21 +25,22 @@
 
 package com.reqica.drilon.imagepickerlibrary;
 
+import android.app.Activity;
 import android.widget.Button;
 
 public class ButtonColorChanger {
 
-    public static void setButtonColor (String buttonColor , Button b1 , String textColor){
+    public static void setButtonColor (String buttonColor , Button b1 , String textColor , Activity activity){
 
         switch (textColor) {
             case "WHITE":
-                b1.setTextColor(0xFFFFFF);
+                b1.setTextColor(activity.getResources().getColor(R.color.white));
                 break;
             case "BLACK":
-                b1.setTextColor(0x000000);
+                b1.setTextColor(activity.getResources().getColor(R.color.black));
                 break;
             default:
-                b1.setTextColor(0xFFFFFF);
+                b1.setTextColor(activity.getResources().getColor(R.color.white));
                 break;
         }
 
