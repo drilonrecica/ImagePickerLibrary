@@ -59,6 +59,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="OK"
+        android:background="@drawable/button_background"
+        android:textColor="@color/white"
         android:id="@+id/scaleBtn"
         android:layout_gravity="center_horizontal" />
 
