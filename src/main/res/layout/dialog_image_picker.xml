@@ -17,11 +17,11 @@
         android:layout_gravity="center_horizontal" />
 
     <Button
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/double_activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/button_background"
+        android:background="@drawable/button_background_blue"
         android:textColor="@color/white"
         android:text="@string/open_camera"
         android:id="@+id/openCamera" />
@@ -33,7 +33,7 @@
         android:layout_weight="1"
         android:textColor="@color/white"
         android:text="@string/open_gallery"
-        android:background="@drawable/button_background"
+        android:background="@drawable/button_background_blue"
         android:id="@+id/openGallery" />
 
 </LinearLayout>
