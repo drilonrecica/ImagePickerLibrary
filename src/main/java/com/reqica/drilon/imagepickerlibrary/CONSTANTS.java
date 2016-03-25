@@ -16,5 +16,7 @@ public class CONSTANTS {
     public static final String ORANGE = "ORANGE";
     public static final String BROWN = "BROWN";
     public static final String BLUE_GREY = "BLUEGREY";
+    public static final String TEXT_WHITE = "WHITE";
+    public static final String TEXT_BLACK = "BLACK";
 
 }
