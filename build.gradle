@@ -10,10 +10,10 @@ ext {
 
     libraryDescription = 'Image Picker Library'
 
-    siteUrl = 'https://drilon.reqica.com'
+    siteUrl = 'http://drilon.reqica.com'
     gitUrl = 'https://github.com/drilonreqica/ImagePickerLibrary.git'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 
     developerId = 'drilonreqica'
     developerName = 'Drilon Reçica'
