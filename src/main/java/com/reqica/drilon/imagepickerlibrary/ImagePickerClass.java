@@ -39,7 +39,7 @@ public class ImagePickerClass  {
         this.activity = activity;
     }
 
-    public void callImagePickerDialog (Context receivedContext , String dialogTitleString , ImageView finalImageView , String buttonColor){
+    public void callImagePickerDialog (Context receivedContext , String dialogTitleString , ImageView finalImageView , String buttonColor , String textColor){
 
         this.context = receivedContext;
         this.imageView = finalImageView;
@@ -54,8 +54,8 @@ public class ImagePickerClass  {
         TextView dialogTitle = (TextView) dialogImagePicker.findViewById(R.id.dialogTitle);
         dialogTitle.setText(dialogTitleString);
 
-        ButtonColorChanger.setButtonColor(buttonColor , openGalleryBtn);
-        ButtonColorChanger.setButtonColor(buttonColor , openCameraBtn);
+        ButtonColorChanger.setButtonColor(buttonColor , openGalleryBtn , textColor);
+        ButtonColorChanger.setButtonColor(buttonColor , openCameraBtn , textColor);
 
         openCameraBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -92,7 +92,7 @@ public class ImagePickerClass  {
     }
 
     // scales the received bitmap or not and then calls the method to set it to the imageview
-    public void scaleImageDialog (final Bitmap bitmap , String buttonColor) {
+    public void scaleImageDialog (final Bitmap bitmap , String buttonColor , String textColor) {
         dialogScaleImage = new Dialog(context);
         dialogScaleImage.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogScaleImage.setContentView(R.layout.dialog_scale_image);
@@ -104,7 +104,7 @@ public class ImagePickerClass  {
         rawWidth = (EditText) dialogScaleImage.findViewById(R.id.width);
         Button scaleBtn = (Button) dialogScaleImage.findViewById(R.id.scaleBtn);
 
-        ButtonColorChanger.setButtonColor(buttonColor , scaleBtn);
+        ButtonColorChanger.setButtonColor(buttonColor , scaleBtn , textColor);
 
         scaleCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -155,7 +155,7 @@ public class ImagePickerClass  {
     }
 
     //calls the methods that automatically set the received image bitmap to the needed ImageView
-    public void onActivityResultLogic (int requestCode, int resultCode, Intent data , String buttonColor){
+    public void onActivityResultLogic (int requestCode, int resultCode, Intent data , String buttonColor , String textColor){
 
         if (requestCode == CONSTANTS.RESULT_CAMERA_IMAGE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -163,7 +163,7 @@ public class ImagePickerClass  {
                     Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                             activity.getContentResolver(), imageUri);
 
-                    scaleImageDialog(thumbnail , buttonColor);
+                    scaleImageDialog(thumbnail , buttonColor , textColor);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -180,7 +180,7 @@ public class ImagePickerClass  {
                     Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
                             activity.getContentResolver(), imageUri);
 
-                    scaleImageDialog(thumbnail , buttonColor);
+                    scaleImageDialog(thumbnail , buttonColor , textColor);
 
                 } catch (Exception e) {
                     e.printStackTrace();

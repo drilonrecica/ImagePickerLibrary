@@ -4,7 +4,15 @@ import android.widget.Button;
 
 public class ButtonColorChanger {
 
-    public static void setButtonColor (String buttonColor , Button b1){
+    public static void setButtonColor (String buttonColor , Button b1 , String textColor){
+
+        if (textColor.equals("WHITE")){
+            b1.setTextColor(0xFFFFFF);
+        }else if (textColor.equals("BLACK")){
+            b1.setTextColor(0x000000);
+        }else {
+            b1.setTextColor(0xFFFFFF);
+        }
 
         switch (buttonColor) {
             case "BLUE":
