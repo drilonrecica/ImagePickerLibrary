@@ -80,6 +80,7 @@ And in the end you have to add this piece of code to the root of your class, obv
 In this part , you don't need to change the first three parameters, only the ones for the colors (these will be used to color the dialog for the scaling of the image, see Pictures at bottom of page).
 
 If you have any issues, question or simply want to add better features, contact me or even better contribute to the project.
+<github@drilon.reqica.com>
 
 ## What's new in Version 1.1.0
 
