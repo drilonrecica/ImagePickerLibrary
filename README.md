@@ -44,7 +44,7 @@ Then you need to call the method which shows the dialog for the permissions:
 ```
 checkMPermissions.checkMPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE , "You need to give access to Image Picker Permission!");
 ```
-So the first parameter used is the actual permission and the second is the Title of the Dialog which will be shown to the user, see Pic.3.
+So the first parameter used is the actual permission and the second is the Title of the Dialog which will be shown to the user, see Pictures at bottom of page.
 ###### Note "You can use this method for any permission you want, just change this part Manifest.permission.NAME_OF_PERMISSION , and also type the title you want the user to see for that specific Permission."
 
 ###### I'm also creating a new library that will deal only with Android M Permissions and alerts for them, so I'll keep you up-to-date about that.
@@ -77,7 +77,7 @@ And in the end you have to add this piece of code to the root of your class, obv
 
     }
 ```
-In this part , you don't need to change the first three parameters, only the ones for the colors (these will be used to color the dialog for the scaling of the image, see Pic.5).
+In this part , you don't need to change the first three parameters, only the ones for the colors (these will be used to color the dialog for the scaling of the image, see Pictures at bottom of page).
 
 If you have any issues, question or simply want to add better features, contact me or even better contribute to the project.
 
@@ -115,5 +115,10 @@ License
         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
         SOFTWARE.
 ```
-
-
+![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_source_dialog1.png "Image Source Dialog")
+![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_source_camera.png "Camera Source Image")
+![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_scaling.png "Scaling Image")
+![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_camera_showing.png "Showing Scaled Camera Image")
+![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_source_gallery.png "Gallery Source Image")
+![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_no_scaling.png "Not Scaling Image")
+![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_gallery_showing.png "Showing not Scaled Gallery Image")
