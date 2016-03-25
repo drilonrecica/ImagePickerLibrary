@@ -24,7 +24,7 @@ If you're using Maven (but not Gradle), you can add the APKlib as a dependency:
 <dependency>
   <groupId>com.reqica.drilon</groupId>
   <artifactId>iplibrary</artifactId>
-  <version>1.0.1</version>
+  <version>1.1.0</version>
   <type>pom</type>
 </dependency>
 ```
