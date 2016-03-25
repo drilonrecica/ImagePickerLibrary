@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ImagePickerLibrary</string>
+    <string name="open_camera">Open Camera</string>
+    <string name="open_gallery">Open Gallery</string>
+    <string name="default_dialog_title">Choose Image Source!</string>
+    <string name="do_you_want_to_scale_the_image">Do you want to scale the image?</string>
+    <string name="scale">Scale?</string>
+    <string name="width">Width</string>
+    <string name="height">Height</string>
+    <string name="ok">OK</string>
 </resources>
