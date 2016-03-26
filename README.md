@@ -47,7 +47,7 @@ checkMPermissions.checkMPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE , 
 So the first parameter used is the actual permission and the second is the Title of the Dialog which will be shown to the user, see Pictures at bottom of page.
 ###### Note "You can use this method for any permission you want, just change this part Manifest.permission.NAME_OF_PERMISSION , and also type the title you want the user to see for that specific Permission."
 
-###### I'm also creating a new library that will deal only with Android M Permissions and alerts for them, so I'll keep you up-to-date about that.
+###### I created a special library just for this, you can check it out here and contribute to it if you want <https://github.com/drilonreqica/Android-M-Permission-Check-Library>
 
 So now let's start with the main function of the library.
 
