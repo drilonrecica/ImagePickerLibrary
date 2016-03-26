@@ -1,6 +1,6 @@
 # Image Picker Library
 
-The Image Picker Library was a tool create by me for the sole purpose of over-simplifying the process of picking an Image from the gallery or shooting one with the camera and then immediately setting it to an ImageView (also with the possibility of scaling the image based on the users need and desires).
+The Image Picker Library is a tool create by me for the sole purpose of over-simplifying the process of picking an Image from the gallery or shooting one with the camera and then immediately setting it to an ImageView (also with the possibility of scaling the image based on the users need and desires).
 
 ## Project set-up
 
