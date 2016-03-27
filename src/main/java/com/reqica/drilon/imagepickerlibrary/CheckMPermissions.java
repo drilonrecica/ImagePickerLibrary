@@ -38,9 +38,9 @@ public class CheckMPermissions {
     Context context;
     Activity activity;
 
-    public CheckMPermissions (Context context , Activity activity){
+    public CheckMPermissions (Context context){
         this.context = context;
-        this.activity = activity;
+        activity = (Activity) context;
     }
 
     public void checkMPermission (final String permission , String dialogMessage) {
