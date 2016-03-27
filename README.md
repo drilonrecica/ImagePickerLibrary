@@ -11,22 +11,14 @@ The Image Picker Library is a tool create by me for the sole purpose of over-sim
 If you're using a Gradle-based project, then you can add ImagePickerLibrary as a dependency directly:
 
 ```
-compile 'com.reqica.drilon:iplibrary:1.1.0'
-```
-To be able to use it you also have to add this snippet to your app module's build.gradle:
-```
-repositories {
-    maven {
-        url 'https://dl.bintray.com/drilonreqica/maven/'
-    }
-}
+compile 'com.reqica.drilon:iplibrary:1.1.1'
 ```
 If you're using Maven (but not Gradle), you can add the APKlib as a dependency:
 ```
 <dependency>
   <groupId>com.reqica.drilon</groupId>
   <artifactId>iplibrary</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -39,7 +31,7 @@ To use the Image Picker Library you have to follow a few simple steps, so bear w
 
 First you need to create an Instance of the CheckMPermission class which automatically adds the needed WRITE_EXTERNAL_STORAGE & READ_EXTERNAL_STORAGE permissions and if the user is using ANDROID M or higher shows a popup to alert the user about the permissions and let him enable them.
 ```
-CheckMPermissions checkMPermissions = new CheckMPermissions(currentActivity.this, currentActivity.this);
+CheckMPermissions checkMPermissions = new CheckMPermissions(currentActivity.this);
 ```
 Replace currentActivity with the name of the main activity of your project.
 Then you need to call the method which shows the dialog for the permissions:
