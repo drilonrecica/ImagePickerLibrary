@@ -1,5 +1,7 @@
 # Image Picker Library
 
+ [ ![Download](https://api.bintray.com/packages/drilonreqica/maven/image-picker-library/images/download.svg) ](https://bintray.com/drilonreqica/maven/image-picker-library/_latestVersion)
+
 The Image Picker Library is a tool create by me for the sole purpose of over-simplifying the process of picking an Image from the gallery or shooting one with the camera and then immediately setting it to an ImageView (also with the possibility of scaling the image based on the users need and desires).
 
 ## Project set-up
