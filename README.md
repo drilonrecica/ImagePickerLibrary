@@ -1,119 +1,199 @@
-# Image Picker Library
+# ImagePickerLibrary
 
- [ ![Download](https://api.bintray.com/packages/drilonreqica/maven/image-picker-library/images/download.svg) ](https://bintray.com/drilonreqica/maven/image-picker-library/_latestVersion)
+> **Archived / discontinued**
+>
+> A lightweight Android library originally created to simplify selecting an image from the gallery or capturing one with the camera and displaying the result in an `ImageView`.
+>
+> **Do not use this library in new Android applications.**
 
-The Image Picker Library is a tool create by me for the sole purpose of over-simplifying the process of picking an Image from the gallery or shooting one with the camera and then immediately setting it to an ImageView (also with the possibility of scaling the image based on the users need and desires).
+This repository is preserved for historical and reference purposes and is no longer maintained.
 
-## Project set-up
+## Background
 
-#### Image Picker Library currently supports API LEVEL 14+
+ImagePickerLibrary was created in 2016 to reduce the amount of boilerplate required for a common Android workflow:
 
-If you're using a Gradle-based project, then you can add ImagePickerLibrary as a dependency directly:
+1. Ask the user whether they want to choose an existing image or take a new photo.
+2. Handle the required storage permissions.
+3. Launch the gallery or camera.
+4. Receive the result in `onActivityResult()`.
+5. Optionally resize the selected image.
+6. Display the final image in an `ImageView`.
 
-```
+At the time, Android did not provide the modern Photo Picker and Activity Result APIs available today, so applications commonly implemented this functionality themselves.
+
+The library wrapped that workflow behind a small API and configurable dialogs.
+
+## Why is this project archived?
+
+Android's media access, storage, permission, and activity-result APIs have changed substantially since this library was created.
+
+Modern Android applications should generally use platform and AndroidX APIs directly instead of this library.
+
+For selecting existing media, Android now provides the system Photo Picker through:
+
+* `ActivityResultContracts.PickVisualMedia`
+* `ActivityResultContracts.PickMultipleVisualMedia`
+
+For taking a photo, AndroidX provides:
+
+* `ActivityResultContracts.TakePicture`
+* `ActivityResultContracts.TakePicturePreview`
+
+The Android Photo Picker allows users to grant access only to the images or videos they select rather than giving an application broad access to the device's media library.
+
+The original implementation also relies on APIs and practices that are now obsolete, including:
+
+* `READ_EXTERNAL_STORAGE` / `WRITE_EXTERNAL_STORAGE` for image selection;
+* `startActivityForResult()` / `onActivityResult()`;
+* the legacy Android Support Library;
+* pre-scoped-storage filesystem assumptions;
+* an Android 6.0-era permission model.
+
+For new applications, use current Android platform guidance instead.
+
+Relevant documentation:
+
+* [Android Photo Picker](https://developer.android.com/training/data-storage/shared/photo-picker)
+* [Activity Result APIs](https://developer.android.com/training/basics/intents/result)
+* [Android storage guidance](https://developer.android.com/training/data-storage)
+* [Minimize permission requests](https://developer.android.com/privacy-and-security/minimize-permission-requests)
+
+## Historical usage
+
+The following examples document how ImagePickerLibrary was originally used.
+
+### Dependency
+
+The final published version was:
+
+```gradle
 compile 'com.reqica.drilon:iplibrary:1.1.1'
 ```
-If you're using Maven (but not Gradle), you can add the APKlib as a dependency:
-```
-<dependency>
-  <groupId>com.reqica.drilon</groupId>
-  <artifactId>iplibrary</artifactId>
-  <version>1.1.1</version>
-  <type>pom</type>
-</dependency>
-```
 
-If you're using a standard project without either Maven or Gradle, you'll have to download the project, and the add the library manually to your project.
+This dependency declaration is preserved for historical reference only and should not be used in new projects.
 
-## Usage
+### Create the image picker
 
-To use the Image Picker Library you have to follow a few simple steps, so bear with me.
-
-First you need to create an Instance of the CheckMPermission class which automatically adds the needed WRITE_EXTERNAL_STORAGE & READ_EXTERNAL_STORAGE permissions and if the user is using ANDROID M or higher shows a popup to alert the user about the permissions and let him enable them.
-```
-CheckMPermissions checkMPermissions = new CheckMPermissions(currentActivity.this);
-```
-Replace currentActivity with the name of the main activity of your project.
-Then you need to call the method which shows the dialog for the permissions:
-```
-checkMPermissions.checkMPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE , "You need to give access to Image Picker Permission!");
-```
-So the first parameter used is the actual permission and the second is the Title of the Dialog which will be shown to the user, see Pictures at bottom of page.
-###### Note "You can use this method for any permission you want, just change this part Manifest.permission.NAME_OF_PERMISSION , and also type the title you want the user to see for that specific Permission."
-
-###### I created a special library just for this, you can check it out here and contribute to it if you want <https://github.com/drilonreqica/Android-M-Permission-Check-Library>
-
-So now let's start with the main function of the library.
-
-Create an empty Instance ov ImagePickerClass in the root of you class so that it will be accessible from all you methods in that class:
-```
+```java
 private ImagePickerClass imagePickerClass;
-```
-And then initialize that Instance in the onCreate of your activity, like this:
-```
-imagePickerClass = new ImagePickerClass(currentActivity.this);
-```
-Keep in mind, wherever you see currentActivity, you have to replace that with the name of the Activity you are using the library in.
 
-So let's continue, now you can call the main method of the library, that is usually done inside an onClickListener of a button, but feel free to try other things out, depending on your needs.
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    imagePickerClass = new ImagePickerClass(this);
+}
 ```
-imagePickerClass.callImagePickerDialog(currentActivity.this , "Choose Image Source!" , imageView , CONSTANTS.BLUE , CONSTANTS.TEXT_BLACK);
-```     
-The important parts here are currentActivity (DUHH), a title for the dialog, the reference variable of the ImageView where the image will be shown at the end, the background color of the dialog button, and the text color of the dialog button.
-The colors must be called from CONSTANTS.NameOfColor, where you already have a variety of colors possible, all taken from the Google Material Design Palette.
 
-And in the end you have to add this piece of code to the root of your class, obviously as it is a method,:
+### Open the image source dialog
+
+```java
+imagePickerClass.callImagePickerDialog(
+    this,
+    "Choose Image Source!",
+    imageView,
+    CONSTANTS.BLUE,
+    CONSTANTS.TEXT_BLACK
+);
 ```
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        imagePickerClass.onActivityResultLogic(requestCode , resultCode , data , CONSTANTS.BLUE , CONSTANTS.TEXT_BLACK);
+The dialog allowed the user to choose between an existing image and capturing a new one.
 
+The selected image was then processed and displayed in the provided `ImageView`.
+
+### Forward the activity result
+
+The original API required the application's activity result to be forwarded to the library:
+
+```java
+@Override
+protected void onActivityResult(
+        int requestCode,
+        int resultCode,
+        Intent data
+) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    imagePickerClass.onActivityResultLogic(
+        requestCode,
+        resultCode,
+        data,
+        CONSTANTS.BLUE,
+        CONSTANTS.TEXT_BLACK
+    );
+}
+```
+
+Modern Android applications should use Activity Result contracts instead.
+
+## Modern Android equivalent
+
+Selecting an image today can be implemented directly using AndroidX:
+
+```kotlin
+private val pickImage =
+    registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        if (uri != null) {
+            imageView.setImageURI(uri)
+        }
     }
 ```
-In this part , you don't need to change the first three parameters, only the ones for the colors (these will be used to color the dialog for the scaling of the image, see Pictures at bottom of page).
 
-If you have any issues, question or simply want to add better features, contact me or even better contribute to the project.
-<github@drilon.reqica.com>
+Launch the picker with:
 
-## What's new in Version 1.1.0
-
-* Added Android M Permission checking
-* Color of dialog buttons can be changed
-* Text color of the dialog button can also be changed
-
-License
-----
-
-**Free Software, Hell Yeah!**
-
+```kotlin
+pickImage.launch(
+    PickVisualMediaRequest(
+        ActivityResultContracts.PickVisualMedia.ImageOnly
+    )
+)
 ```
-        MIT License
-        
-        Copyright (c) [2016] [Drilon Reçica]
 
-        Permission is hereby granted, free of charge, to any person obtaining a copy
-        of this software and associated documentation files (the "Software"), to deal
-        in the Software without restriction, including without limitation the rights
-        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-        copies of the Software, and to permit persons to whom the Software is
-        furnished to do so, subject to the following conditions:
+AndroidX automatically uses the system Photo Picker where available and provides compatible behavior on older supported Android versions.
 
-        The above copyright notice and this permission notice shall be included in all
-        copies or substantial portions of the Software.
+A photo captured by the system camera can similarly be handled using:
 
-        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-        SOFTWARE.
+```kotlin
+ActivityResultContracts.TakePicture()
 ```
-![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_source_dialog1.png "Image Source Dialog")
-![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_source_camera.png "Camera Source Image")
-![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_scaling.png "Scaling Image")
-![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_camera_showing.png "Showing Scaled Camera Image")
-![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_source_gallery.png "Gallery Source Image")
-![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_no_scaling.png "Not Scaling Image")
-![Image](http://drilon.reqica.com/imagepickerlibrary/screenshots/image_gallery_showing.png "Showing not Scaled Gallery Image")
+
+For applications that need their own integrated camera interface rather than launching the system camera, CameraX is the modern Android camera API.
+
+## Original features
+
+ImagePickerLibrary provided:
+
+* gallery image selection;
+* camera image capture;
+* automatic display in an `ImageView`;
+* image resizing;
+* Android runtime permission handling;
+* configurable dialog colors;
+* a simple API intended to hide the underlying activity-result boilerplate.
+
+## Historical implementation
+
+The final version of the project was `1.1.1`.
+
+The codebase targets the Android development environment of its time, including:
+
+* `compileSdkVersion 23`;
+* `targetSdkVersion 23`;
+* Android Support Library `23.2.1`;
+* the legacy Gradle `compile` dependency configuration.
+
+The repository should therefore be treated as historical source code rather than a usable modern Android dependency.
+
+## Project status
+
+**Status:** Archived
+**Maintenance:** Discontinued
+**Latest historical version:** `1.1.1`
+**Recommended for new projects:** No
+**Purpose of repository:** Historical reference
+
+## License
+
+ImagePicker
